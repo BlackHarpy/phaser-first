@@ -4,9 +4,9 @@
   "description": "First game using Phaser.io",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "./node_modules/.bin/webpack --config webpack.config.js",
     "lint": "eslint src --ext ts",
-    "serve": "ts-node src/index.ts",
+    "serve": "ts-node src/server/index.ts",
     "test": "mocha -r ts-node/register src/**/*.spec.ts"
   },
   "repository": {
@@ -20,16 +20,20 @@
   },
   "homepage": "https://github.com/BlackHarpy/phaser-first#readme",
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "phaser-ce": "^2.9.2"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.44",
     "@types/node": "^8.0.51",
     "eslint": "^4.11.0",
+    "expose-loader": "^0.7.3",
     "mocha": "^4.0.1",
     "supertest": "^3.0.0",
+    "ts-loader": "^3.1.1",
     "ts-node": "^3.3.0",
     "typescript": "^2.6.1",
-    "typescript-eslint-parser": "^9.0.0"
+    "typescript-eslint-parser": "^9.0.0",
+    "webpack": "^3.8.1"
   }
 }

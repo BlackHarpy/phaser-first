@@ -1,7 +1,7 @@
 import * as express from 'express'
 import * as path from 'path'
 
-class App {
+class Server {
     public express
 
     constructor () {
@@ -12,10 +12,13 @@ class App {
     private mountRoutes(): void {
         const router = express.Router()
         router.get('/', (req, res) => {
-            res.sendFile(path.join(__dirname, '../index.html'));
+            res.sendFile(path.join(__dirname, '../../index.html'));
         })
+        this.express.use(express.static(__dirname + '../../../dist'))          
+        this.express.use('/assets',express.static(__dirname + '../../assets'))          
         this.express.use('/', router)
+        
     }
 }
 
-export default new App().express
+export default new Server().express
