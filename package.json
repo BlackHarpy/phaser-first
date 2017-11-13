@@ -4,9 +4,9 @@
   "description": "First game using Phaser.io",
   "main": "index.js",
   "scripts": {
-    "build": "./node_modules/.bin/webpack --config webpack.config.js",
+    "build": "webpack --config webpack.config.js",
     "lint": "eslint src --ext ts",
-    "serve": "ts-node src/server/index.ts",
+    "serve": "webpack --config webpack.config.js && ts-node src/server/index.ts",
     "test": "mocha -r ts-node/register src/**/*.spec.ts"
   },
   "repository": {
