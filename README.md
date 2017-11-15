@@ -1,13 +1,12 @@
 # Phaser First Game
 
-My first Phaser Game using Typescript.
+A boilerplate for making Phaser games with Typescript and Webpack.
 
-Node server also made with Typescript.
+I'm supposed to add an explanation of the things I did to make it work :)
 
 ## Requirements
 
-This was made using Node v8.9.1
-Don't know if an earlier version will work, so I recommend to run with this one.
+This was made using Node v8.9.1.
 
 ## Running the Project
 
@@ -21,7 +20,7 @@ The server runs in Typescript using ts-node with no need of compiling first (onl
 
 To only build the game app script
 
-`$ npm run build` 
+`$ npm run builbd` 
 
 And to run a simple test for serving the index file
 
