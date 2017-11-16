@@ -15,7 +15,7 @@ class Server {
             res.sendFile(path.join(__dirname, '../../index.html'));
         })
         this.express.use(express.static(__dirname + '../../../dist'))          
-        this.express.use('/assets',express.static(__dirname + '../../assets'))          
+        this.express.use('/assets',express.static(__dirname + '../../dist/assets'))          
         this.express.use('/', router)
         
     }

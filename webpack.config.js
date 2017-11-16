@@ -1,4 +1,5 @@
 const path = require('path')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const phaserModule = path.join(__dirname, '/node_modules/phaser-ce/')
 const phaser = path.join(phaserModule, 'build/custom/phaser-split.js'),
@@ -7,11 +8,17 @@ const phaser = path.join(phaserModule, 'build/custom/phaser-split.js'),
 
 module.exports = {
   devtool: 'inline-source-map',
-  entry: './src/game/app.ts',
+  entry: './src/scripts/app.ts',
   output: {
     filename: 'app.js',
     path: path.resolve(__dirname, 'dist')
   },
+  plugins: [
+    new CopyWebpackPlugin([{
+      from: './src/assets',
+      to:'./assets'
+    }])
+  ],
   resolve: {
     alias: {
       'phaser': phaser,

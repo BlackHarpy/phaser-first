@@ -20,7 +20,7 @@ The server runs in Typescript using ts-node with no need of compiling first (onl
 
 To only build the game app script
 
-`$ npm run builbd` 
+`$ npm run build` 
 
 And to run a simple test for serving the index file
 
