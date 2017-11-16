@@ -1,4 +1,4 @@
-# Phaser First Game
+# Phaser Boilerplate
 
 A boilerplate for making Phaser games with Typescript and Webpack.
 
@@ -26,4 +26,19 @@ And to run a simple test for serving the index file
 
 `$ npm run test`
 
-Aaand, more to come...
+## Creating the boilerplate
+
+### Add build Phaser files
+
+* Phaser: Game framework
+* Pixi: Rendering Engine
+* P2: Physics Engine
+
+### Typescript Definitions
+
+* Import definitions for Phaser and Pixi
+
+### Webpack configuration
+
+* Path aliases
+* Expose Loader: To add modules as global entities.
