@@ -1,7 +1,7 @@
 {
   "name": "phaser-first",
   "version": "1.0.0",
-  "description": "First game using Phaser.io",
+  "description": "Breakout game using Phaser with Typescript",
   "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack.config.js",
@@ -26,9 +26,9 @@
   "devDependencies": {
     "@types/mocha": "^2.2.44",
     "@types/node": "^8.0.51",
-    "copy-webpack-plugin": "^4.2.0",
     "eslint": "^4.11.0",
     "expose-loader": "^0.7.3",
+    "file-loader": "^1.1.5",
     "mocha": "^4.0.1",
     "supertest": "^3.0.0",
     "ts-loader": "^3.1.1",
