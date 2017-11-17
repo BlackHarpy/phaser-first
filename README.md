@@ -23,3 +23,9 @@ To only build the game app script
 And to run a simple test for serving the index file
 
 `$ npm run test`
+
+## Acknowledgments
+
+The code for this project is based on the book [Developing an HTML5 Brick-breaker Game With Phaser](https://leanpub.com/brick-breaker-phaser) by [Jorge Palacios](https://github.com/pctroll)
+
+Checkout the [repository](https://github.com/pctroll/brick-breaker-phaser) for information about assets. 
