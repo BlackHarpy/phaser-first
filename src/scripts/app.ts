@@ -6,13 +6,15 @@ import 'pixi'
 import 'p2'
 import 'phaser'
 
+import Preloader from './states/preloader'
 import MainState from './states/main'
 
 export default class App extends Phaser.Game {
     constructor(config: Phaser.IGameConfig) {
       super(config)
+      this.state.add('preloader', Preloader)
       this.state.add('main', MainState)
-      this.state.start('main')
+      this.state.start('preloader')
     }
   }
 
