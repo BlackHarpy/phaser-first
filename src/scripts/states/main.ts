@@ -3,6 +3,7 @@
 import State from './state'
 import Paddle from '../elements/paddle'
 import Bricks from '../elements/bricks'
+import Ball from '../elements/ball'
 
 const paddleImage  = require('assets/img/paddle.png')
 const greenBrickImage  = require('assets/img/brick_green.png')
@@ -11,19 +12,12 @@ const redBrickImage  = require('assets/img/brick_red.png')
 const yellowBrickImage  = require('assets/img/brick_yellow.png')
 const ballImage  = require('assets/img/ball.png')
 
-//TODO: Divide elements into modules
-
 export default class MainState extends State {
 
   //Paddle configs
   paddle: Paddle
   bricks: Bricks
-
-  //Ball config
-  ball: Phaser.Sprite
-  ballIsShot: boolean
-  ballIniVelX: number
-  ballIniVelY: number
+  ball: Ball
 
   create(): void {
 
@@ -33,21 +27,8 @@ export default class MainState extends State {
 
     this.paddle = new Paddle(this.game, 0, 0)
     this.bricks = new Bricks(this.game)
+    this.ball = new Ball(this.game, 0, 0)
 
-     // create the ball
-     this.ball = this.game.add.sprite(0,0, 'ball');
-     // enable the physics system
-     this.game.physics.arcade.enable(this.ball);
-     this.ball.body.enable = true;
-     // set bounce rate (1 means mirroring velocity)
-     this.ball.body.bounce.set(1);
-     // make it collide with the world bounds
-     this.ball.body.collideWorldBounds = true;
-     // add a custom member variable
-     this.ballIsShot = false;
-     this.ballIniVelX = 200;
-     this.ballIniVelY = -300;
-
-     this.paddle.resetPosition()
+    this.paddle.resetPosition()
   }
 }
