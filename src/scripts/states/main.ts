@@ -1,7 +1,8 @@
 'use strict'
 
 import State from './state'
-import Paddle from '../elements/paddle';
+import Paddle from '../elements/paddle'
+import Bricks from '../elements/bricks'
 
 const paddleImage  = require('assets/img/paddle.png')
 const greenBrickImage  = require('assets/img/brick_green.png')
@@ -16,11 +17,7 @@ export default class MainState extends State {
 
   //Paddle configs
   paddle: Paddle
-
-  //Bricks config
-  bricks: Phaser.Group
-  numCols: number
-  numRows: number
+  bricks: Bricks
 
   //Ball config
   ball: Phaser.Sprite
@@ -34,32 +31,8 @@ export default class MainState extends State {
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
     this.game.physics.arcade.checkCollision.down = false;
 
-    this.numCols = 10
-    this.numRows = 4
-
     this.paddle = new Paddle(this.game, 0, 0)
-
-    //Bricks group
-    const brickImages = [
-      'greenBrick',
-      'purpleBrick',
-      'redBrick',
-      'yellowBrick'
-    ];
-    this.bricks = this.game.add.group()
-    this.bricks.enableBody = true;
-    this.bricks.physicsBodyType = Phaser.Physics.ARCADE;
-
-    let i, j
-    for (i = 0; i < this.numRows; i++) {
-      const img = brickImages[i];
-      for (j = 0; j < this.numCols; j++) {
-        const brick = this.bricks.create(0, 0, img);
-        // place the brick accordingly
-        brick.x = brick.width * j;
-        brick.y = brick.height * i;
-      }
-    }
+    this.bricks = new Bricks(this.game)
 
      // create the ball
      this.ball = this.game.add.sprite(0,0, 'ball');
