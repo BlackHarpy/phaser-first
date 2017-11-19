@@ -14,7 +14,6 @@ const ballImage  = require('assets/img/ball.png')
 
 export default class MainState extends State {
 
-  //Paddle configs
   paddle: Paddle
   bricks: Bricks
   ball: Ball
@@ -25,10 +24,12 @@ export default class MainState extends State {
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
     this.game.physics.arcade.checkCollision.down = false;
 
+    //Set Game Elements
     this.paddle = new Paddle(this.game, 0, 0)
     this.bricks = new Bricks(this.game)
     this.ball = new Ball(this.game, 0, 0)
 
+    //Set paddle to center
     this.paddle.resetPosition()
   }
 }

@@ -22,7 +22,7 @@ window.onload = () => {
     const config: Phaser.IGameConfig = {
         width:           640, 
         height:          400,
-        renderer:        Phaser.AUTO,
+        renderer:        Phaser.AUTO,       //Reseach further about Phaser.WEBGL_MULTI multi-texture rendering
         parent:          'content',
         resolution:      1,
         forceSetTimeOut: false
