@@ -7,6 +7,7 @@ const greenBrickImage  = require('assets/img/brick_green.png')
 const purpleBrickImage  = require('assets/img/brick_purple.png')
 const redBrickImage  = require('assets/img/brick_red.png')
 const yellowBrickImage  = require('assets/img/brick_yellow.png')
+const ballImage  = require('assets/img/ball.png')
 
 //TODO: Divide elements into modules
 
@@ -18,10 +19,17 @@ export default class MainState extends State {
   prevX: number
   paddleHalf: number
 
-  //Bricks col and rows
+  //Bricks config
   bricks: Phaser.Group
   numCols: number
   numRows: number
+
+  //Ball config
+  ball: Phaser.Sprite
+  ballIsShot: boolean
+  ballIniVelX: number
+  ballIniVelY: number
+
 
   preload(): void {
     this.game.load.image('paddle', paddleImage)
@@ -29,9 +37,14 @@ export default class MainState extends State {
     this.game.load.image('purpleBrick', purpleBrickImage)
     this.game.load.image('redBrick', redBrickImage)
     this.game.load.image('yellowBrick', yellowBrickImage)
+    this.game.load.image('ball', ballImage)
   }
 
   create(): void {
+
+    //Physics system
+    this.game.physics.startSystem(Phaser.Physics.ARCADE);
+    this.game.physics.arcade.checkCollision.down = false;
 
     this.numCols = 10
     this.numRows = 4
@@ -39,6 +52,12 @@ export default class MainState extends State {
     this.paddleVelX = 500 / 1000
     this.prevX = this.game.input.x
     this.paddle = this.game.add.sprite(0, 0, 'paddle')
+
+    //Paddle physics
+    this.game.physics.arcade.enable(this.paddle);
+    this.paddle.body.enable = true;
+    this.paddle.body.immovable = true;
+
     this.paddleHalf = this.paddle.width / 2
 
     //Bricks group
@@ -49,6 +68,8 @@ export default class MainState extends State {
       'yellowBrick'
     ];
     this.bricks = this.game.add.group()
+    this.bricks.enableBody = true;
+    this.bricks.physicsBodyType = Phaser.Physics.ARCADE;
 
     let i, j
     for (i = 0; i < this.numRows; i++) {
@@ -60,6 +81,21 @@ export default class MainState extends State {
         brick.y = brick.height * i;
       }
     }
+
+     // create the ball
+     this.ball = this.game.add.sprite(0,0, 'ball');
+     // enable the physics system
+     this.game.physics.arcade.enable(this.ball);
+     this.ball.body.enable = true;
+     // set bounce rate (1 means mirroring velocity)
+     this.ball.body.bounce.set(1);
+     // make it collide with the world bounds
+     this.ball.body.collideWorldBounds = true;
+     // add a custom member variable
+     this.ballIsShot = false;
+     this.ballIniVelX = 200;
+     this.ballIniVelY = -300;
+
     this.resetPaddle()
   }
 
