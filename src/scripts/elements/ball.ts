@@ -33,6 +33,22 @@ export default class Paddle extends Phaser.Sprite {
   }
 
   update(): void {
+ 
+  }
+
+  move(x: number): void {
+    if (!this.config.isShot) {
+      this.x = x
+    }
+  }
+
+  //Paddle stats
+  resetPosition(x: number, y: number, height: number): void {
+    this.anchor.set(0.5, 1)
+    this.x = x
+    this.y = y - height
+    this.config.isShot = false
+    this.body.velocity.set(0)
   }
 
 }

@@ -26,8 +26,7 @@ export default class Paddle extends Phaser.Sprite {
     this.body.immovable = true;     //Won't recieve any impact from other bodies
   }
 
-  update(): void {
-
+  move(): void {
     //Get input from left and right keys
     const isLeftDown: boolean = this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)
     const isRightDown: boolean = this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)

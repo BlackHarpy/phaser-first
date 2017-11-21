@@ -31,5 +31,16 @@ export default class MainState extends State {
 
     //Set paddle to center
     this.paddle.resetPosition()
+    //Set ball to center
+    this.ball.resetPosition(this.paddle.x, this.paddle.y, this.paddle.height)
+  }
+
+  update(): void {
+    //Define collisions
+    this.game.physics.arcade.collide(this.ball, this.paddle);
+    //this.game.physics.arcade.collide(this.ball, this.bricks, this.removeBrick, null, this);
+
+    this.paddle.move()
+    this.ball.move(this.paddle.x)
   }
 }
