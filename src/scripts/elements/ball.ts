@@ -33,7 +33,9 @@ export default class Paddle extends Phaser.Sprite {
   }
 
   update(): void {
- 
+    if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
+      this.shootBall()
+    }
   }
 
   move(x: number): void {
@@ -49,6 +51,21 @@ export default class Paddle extends Phaser.Sprite {
     this.y = y - height
     this.config.isShot = false
     this.body.velocity.set(0)
+  }
+
+  shootBall(): void {
+    if (!this.config.isShot) {
+      let velX = this.config.iniVelX
+      const velY = this.config.iniVelY
+      const rand = Math.floor(Math.random() * 2);
+      if (rand % 2 == 0) {
+        velX *= -1
+      }
+      this.config.isShot = true;
+      //var state = this.game.state.getCurrentState();
+      this.body.velocity.set(velX, velY);
+      //this.sfxHitPaddle.play();
+    } 
   }
 
 }
