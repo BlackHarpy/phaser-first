@@ -6,7 +6,7 @@ interface ballConfig {
   iniVelY: number
 }
 
-export default class Paddle extends Phaser.Sprite {
+export default class Ball extends Phaser.Sprite {
   config: ballConfig
 
   constructor(game: Phaser.Game, x: number, y: number) {
@@ -15,7 +15,7 @@ export default class Paddle extends Phaser.Sprite {
     //Add sprite to the game
     game.add.existing(this)    
 
-    this.game.physics.arcade.enable(this)
+    game.physics.arcade.enable(this)
     this.body.enable = true
     // Bounce rate 1 means mirroring velocity
     this.body.bounce.set(1)
@@ -62,9 +62,7 @@ export default class Paddle extends Phaser.Sprite {
         velX *= -1
       }
       this.config.isShot = true;
-      //var state = this.game.state.getCurrentState();
       this.body.velocity.set(velX, velY);
-      //this.sfxHitPaddle.play();
     } 
   }
 

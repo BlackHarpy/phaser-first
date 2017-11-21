@@ -6,7 +6,7 @@ interface bricksConfig {
   rows: number
 }
 
-export default class Paddle extends Phaser.Group {
+export default class Bricks extends Phaser.Group {
   config: bricksConfig
   brickImages = [
     'greenBrick',
@@ -20,7 +20,7 @@ export default class Paddle extends Phaser.Group {
     
     this.config = {
       cols: 10,
-      rows: 5
+      rows: 4
     }
 
     //Add group to game
@@ -36,17 +36,15 @@ export default class Paddle extends Phaser.Group {
     let i, j
     for (i = 0; i < this.config.rows; i++) {
       //Each line is a different color
-      const img = this.brickImages[i];
+      let img = this.brickImages[i];
       for (j = 0; j < this.config.cols; j++) {
-        const brick = this.create(0, 0, img);
+        let brick = this.create(0, 0, img)
         //Set brick position next to another
-        brick.x = brick.width * j;
-        brick.y = brick.height * i;
+        brick.x = brick.width * j
+        brick.y = brick.height * i
+        //Prevents brick from moving when it gets a collision
+        brick.body.immovable = true
       }
     }
   }
-
-  update(): void {
-  }
-
 }

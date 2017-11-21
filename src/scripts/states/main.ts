@@ -5,13 +5,6 @@ import Paddle from '../elements/paddle'
 import Bricks from '../elements/bricks'
 import Ball from '../elements/ball'
 
-const paddleImage  = require('assets/img/paddle.png')
-const greenBrickImage  = require('assets/img/brick_green.png')
-const purpleBrickImage  = require('assets/img/brick_purple.png')
-const redBrickImage  = require('assets/img/brick_red.png')
-const yellowBrickImage  = require('assets/img/brick_yellow.png')
-const ballImage  = require('assets/img/ball.png')
-
 export default class MainState extends State {
 
   paddle: Paddle
@@ -22,6 +15,8 @@ export default class MainState extends State {
 
     //Physics system
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
+
+    //Turns off collision with the bottom of the world
     this.game.physics.arcade.checkCollision.down = false;
 
     //Set Game Elements
@@ -37,10 +32,22 @@ export default class MainState extends State {
 
   update(): void {
     //Define collisions
+    //Set collision between the ball and the paddle
     this.game.physics.arcade.collide(this.ball, this.paddle);
-    //this.game.physics.arcade.collide(this.ball, this.bricks, this.removeBrick, null, this);
+    //Set collision between the ball and the bricks and calls 'removeBrick' function when a collision is detected
+    this.game.physics.arcade.collide(this.ball, this.bricks, this.removeBrick);
 
     this.paddle.move()
     this.ball.move(this.paddle.x)
+  }
+
+  //for debug purposes
+  // render(): void {
+  //     this.game.debug.bodyInfo(this.ball, 16, 24)
+  // }
+
+  removeBrick(ball: Ball, brick: Phaser.Sprite): void {
+    //Removes collisioned brick
+    brick.kill()
   }
 }
