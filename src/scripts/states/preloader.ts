@@ -8,6 +8,8 @@ const purpleBrickImage  = require('assets/img/brick_purple.png')
 const redBrickImage  = require('assets/img/brick_red.png')
 const yellowBrickImage  = require('assets/img/brick_yellow.png')
 const ballImage  = require('assets/img/ball.png')
+const blueBackgroundImage  = require('assets/img/bg_blue.png')
+const blackBackgroundImage  = require('assets/img/bg_black.png')
 
 export default class PreloaderState extends State {
   preload() {
@@ -17,6 +19,8 @@ export default class PreloaderState extends State {
     this.game.load.image('redBrick', redBrickImage)
     this.game.load.image('yellowBrick', yellowBrickImage)
     this.game.load.image('ball', ballImage)
+    this.game.load.image('blackBackground', blackBackgroundImage)
+    this.game.load.image('blueBackground', blueBackgroundImage)
   }
 
   create() {

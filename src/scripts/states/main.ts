@@ -4,12 +4,15 @@ import State from './state'
 import Paddle from '../elements/paddle'
 import Bricks from '../elements/bricks'
 import Ball from '../elements/ball'
+import Tile from '../elements/tile'
 
 export default class MainState extends State {
 
   paddle: Paddle
   bricks: Bricks
   ball: Ball
+  background: Tile
+  blackLine: Tile
 
   create(): void {
 
@@ -17,9 +20,12 @@ export default class MainState extends State {
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
     //Turns off collision with the bottom of the world
-    this.game.physics.arcade.checkCollision.down = false;
+    this.game.physics.arcade.checkCollision.down = false
 
     //Set Game Elements
+    const w = this.game.world.width
+    let h = this.game.world.height
+    this.background = new Tile(this.game, 0, 0, w, h, 'blueBackground')
     this.paddle = new Paddle(this.game, 0, 0)
     this.bricks = new Bricks(this.game)
     this.ball = new Ball(this.game, 0, 0)
@@ -28,6 +34,11 @@ export default class MainState extends State {
     this.paddle.resetPosition()
     //Set ball to center
     this.ball.resetPosition(this.paddle.x, this.paddle.y, this.paddle.height)
+    h = this.paddle.height
+    this.blackLine = new Tile(this.game, 0, 0, w, h, 'blackBackground')
+    this.blackLine.anchor.set(0, 1)
+    this.blackLine.y = this.game.world.height
+
   }
 
   update(): void {
