@@ -19,7 +19,7 @@ export default class Bricks extends Phaser.Group {
     super(game)
     
     this.config = {
-      cols: 10,
+      cols: 15,
       rows: 4
     }
 
