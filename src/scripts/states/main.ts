@@ -5,6 +5,7 @@ import Paddle from '../elements/paddle'
 import Bricks from '../elements/bricks'
 import Ball from '../elements/ball'
 import Tile from '../elements/tile'
+import Text from '../elements/text'
 
 export default class MainState extends State {
 
@@ -13,6 +14,7 @@ export default class MainState extends State {
   ball: Ball
   background: Tile
   blackLine: Tile
+  livesText: Text
 
   create(): void {
 
@@ -37,7 +39,18 @@ export default class MainState extends State {
     h = this.paddle.height
     this.blackLine = new Tile(this.game, 0, 0, w, h, 'blackBackground')
     this.blackLine.anchor.set(0, 1)
+    //place at the bottom: 0, 0 is top left corner
     this.blackLine.y = this.game.world.height
+    const textConfig = {
+      font: "18px Arial",
+      fill: "#ffffff",
+      align: "right",
+      anchor: {
+        x: 0,
+        y: 1
+      }
+    }
+    this.livesText = new Text(this.game, 0, 0, 'Cowabunga', textConfig)
 
   }
 
