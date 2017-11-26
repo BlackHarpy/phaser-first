@@ -6,6 +6,7 @@ import Bricks from '../elements/bricks'
 import Ball from '../elements/ball'
 import Tile from '../elements/tile'
 import Text from '../elements/text'
+import Player from '../elements/player'
 
 export default class MainState extends State {
 
@@ -15,9 +16,12 @@ export default class MainState extends State {
   background: Tile
   blackLine: Tile
   livesText: Text
+  scoreText: Text
+  player: Player
 
   create(): void {
 
+    this.player = new Player()
     //Physics system
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -41,17 +45,30 @@ export default class MainState extends State {
     this.blackLine.anchor.set(0, 1)
     //place at the bottom: 0, 0 is top left corner
     this.blackLine.y = this.game.world.height
+    this.setTexts()
+
+  }
+
+  setTexts(): void {
+    //bring Text config interface here
     const textConfig = {
-      font: "18px Arial",
-      fill: "#ffffff",
-      align: "right",
+      style: {
+        font: "18px Arial",
+        fill: "#ffffff",
+        align: "right"
+      },
       anchor: {
         x: 0,
         y: 1
       }
     }
-    this.livesText = new Text(this.game, 0, 0, 'Cowabunga', textConfig)
-
+    this.livesText = new Text(this.game, 0, this.game.world.height, `Lives: ${this.player.stats.lives}`, textConfig)
+    textConfig.style.align = 'right'
+    textConfig.anchor = {
+      x: 1,
+      y : undefined
+    }
+    this.scoreText = new Text(this.game, this.game.world.width, this.game.world.height, `${this.player.stats.score} points`, textConfig)
   }
 
   update(): void {

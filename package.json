@@ -7,7 +7,9 @@
     "build": "webpack --config webpack.config.js",
     "lint": "eslint src --ext ts",
     "serve": "webpack --config webpack.config.js && ts-node src/server/index.ts",
-    "test": "mocha -r ts-node/register src/**/*.spec.ts"
+    "test": "mocha -r ts-node/register src/**/*.spec.ts",
+    "watch": "webpack --watch --config webpack.config",
+    "node": "ts-node src/server/index.ts"
   },
   "repository": {
     "type": "git",

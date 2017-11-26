@@ -1,28 +1,38 @@
 'use strict'
 
+interface anchorConfig {
+  x: number,
+  y: number
+}
+
 interface textConfig {
-  fill: string,
-  align: string,
-  font: string,
-  anchor: any
+  style: {
+    fill: string,
+    align: string,
+    font: string,
+  },  
+  anchor: anchorConfig
 }
 
 export default class Text extends Phaser.Text {
   config: textConfig
 
-  //TODO - refine constructor parameters (no any shit, but I'm tired and sleepy)
   constructor(game: Phaser.Game, x: number, y: number, text: string, config: textConfig) {
-    super(game, x, y, text)
+    super(game, 0, 0, text, config.style)
     this.config = config
     game.add.existing(this)
-    this.setConfig()
-    this.y = game.world.height
+    this.setAnchor(config.anchor)
+    this.x = x
+    this.y = y
   }
 
-  setConfig(): void {
-    this.anchor.set(this.config.anchor.x, this.config.anchor.y)
-    this.font = this.config.font    
-    this.align = this.config.align
-    this.fill = this.config.fill
+  setAnchor(anchor: anchorConfig): void {
+    console.log('anchor', anchor)
+    if (anchor.y) {
+      console.log('hola')
+      this.anchor.set(anchor.x, anchor.y)    
+    } else {
+      this.anchor.set(anchor.x)
+    }
   }
 }

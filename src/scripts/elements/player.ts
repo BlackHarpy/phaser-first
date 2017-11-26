@@ -9,7 +9,9 @@ export default class Player {
   stats: playerStats
 
   constructor() {
-    this.stats.lives = 3
-    this.stats.score =  0
+    this.stats = {
+      lives: 3,
+      score: 0
+    }
   }
 }
