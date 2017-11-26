@@ -57,12 +57,13 @@ export default class Ball extends Phaser.Sprite {
     if (!this.config.isShot) {
       let velX = this.config.iniVelX
       const velY = this.config.iniVelY
-      const rand = Math.floor(Math.random() * 2);
+      //Sets ball starting direction
+      const rand = Math.floor(Math.random() * 2)
       if (rand % 2 == 0) {
         velX *= -1
       }
       this.config.isShot = true;
-      this.body.velocity.set(velX, velY);
+      this.body.velocity.set(velX, velY)
     } 
   }
 

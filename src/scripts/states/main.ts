@@ -1,23 +1,32 @@
 'use strict'
 
 import State from './state'
+import Player from '../elements/player'
 import Paddle from '../elements/paddle'
 import Bricks from '../elements/bricks'
 import Ball from '../elements/ball'
 import Tile from '../elements/tile'
 import Text from '../elements/text'
-import Player from '../elements/player'
 
 export default class MainState extends State {
 
+  player: Player
+
+  //Sprites Elements
   paddle: Paddle
   bricks: Bricks
   ball: Ball
   background: Tile
   blackLine: Tile
+
+  //Texts
   livesText: Text
   scoreText: Text
-  player: Player
+  
+  //Audio elements
+  sfxHitBrick: Phaser.Sound
+  sfxHitPaddle: Phaser.Sound
+  bgmMusic: Phaser.Sound
 
   create(): void {
     this.player = new Player()
@@ -28,11 +37,20 @@ export default class MainState extends State {
     this.paddle.resetPosition()
     //Set ball to center
     this.ball.resetPosition(this.paddle.x, this.paddle.y, this.paddle.height)
-    
+
     this.setTexts()
+    this.setSounds()
   }
 
-  createGameElements() {
+  setPhysicsSystem(): void {
+    //Physics system
+    this.game.physics.startSystem(Phaser.Physics.ARCADE);
+
+    //Turns off collision with the bottom of the world
+    this.game.physics.arcade.checkCollision.down = false
+  }
+
+  createGameElements(): void {
     //Set Game Elements
     const w = this.game.world.width
     const h = this.game.world.height
@@ -48,14 +66,6 @@ export default class MainState extends State {
     this.blackLine = new Tile(this.game, 0, 0, w, pHeight, 'blackBackground')
     this.blackLine.anchor.set(0, 1)
     this.blackLine.y = h
-  }
-
-  setPhysicsSystem() {
-    //Physics system
-    this.game.physics.startSystem(Phaser.Physics.ARCADE);
-
-    //Turns off collision with the bottom of the world
-    this.game.physics.arcade.checkCollision.down = false
   }
 
   setTexts(): void {
@@ -80,12 +90,17 @@ export default class MainState extends State {
     this.scoreText = new Text(this.game, this.game.world.width, this.game.world.height, `${this.player.stats.score} points`, textConfig)
   }
 
+  setSounds(): void {
+    this.sfxHitBrick = this.game.add.audio('hitBrick')
+    this.sfxHitPaddle = this.game.add.audio('hitPaddle')
+  }
+
   update(): void {
     //Define collisions
     //Set collision between the ball and the paddle
-    this.game.physics.arcade.collide(this.ball, this.paddle);
+    this.game.physics.arcade.collide(this.ball, this.paddle, this.hitPaddle, null, this);
     //Set collision between the ball and the bricks and calls 'removeBrick' function when a collision is detected
-    this.game.physics.arcade.collide(this.ball, this.bricks, this.removeBrick);
+    this.game.physics.arcade.collide(this.ball, this.bricks, this.removeBrick, null, this);
 
     this.paddle.move()
     this.ball.move(this.paddle.x)
@@ -99,5 +114,11 @@ export default class MainState extends State {
   removeBrick(ball: Ball, brick: Phaser.Sprite): void {
     //Removes collisioned brick
     brick.kill()
+    this.sfxHitBrick.play()
+  }
+
+  hitPaddle() {
+    //Plays sound when the ball hits the paddle
+    this.sfxHitPaddle.play()
   }
 }
