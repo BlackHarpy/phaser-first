@@ -27,9 +27,7 @@ export default class Text extends Phaser.Text {
   }
 
   setAnchor(anchor: anchorConfig): void {
-    console.log('anchor', anchor)
     if (anchor.y) {
-      console.log('hola')
       this.anchor.set(anchor.x, anchor.y)    
     } else {
       this.anchor.set(anchor.x)

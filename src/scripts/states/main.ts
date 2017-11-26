@@ -20,33 +20,42 @@ export default class MainState extends State {
   player: Player
 
   create(): void {
-
     this.player = new Player()
-    //Physics system
-    this.game.physics.startSystem(Phaser.Physics.ARCADE);
-
-    //Turns off collision with the bottom of the world
-    this.game.physics.arcade.checkCollision.down = false
-
-    //Set Game Elements
-    const w = this.game.world.width
-    let h = this.game.world.height
-    this.background = new Tile(this.game, 0, 0, w, h, 'blueBackground')
-    this.paddle = new Paddle(this.game, 0, 0)
-    this.bricks = new Bricks(this.game)
-    this.ball = new Ball(this.game, 0, 0)
+    this.setPhysicsSystem()   
+    this.createGameElements()
 
     //Set paddle to center
     this.paddle.resetPosition()
     //Set ball to center
     this.ball.resetPosition(this.paddle.x, this.paddle.y, this.paddle.height)
-    h = this.paddle.height
-    this.blackLine = new Tile(this.game, 0, 0, w, h, 'blackBackground')
-    this.blackLine.anchor.set(0, 1)
-    //place at the bottom: 0, 0 is top left corner
-    this.blackLine.y = this.game.world.height
+    
     this.setTexts()
+  }
 
+  createGameElements() {
+    //Set Game Elements
+    const w = this.game.world.width
+    const h = this.game.world.height
+
+    //0, 0 is top left corner
+    this.background = new Tile(this.game, 0, 0, w, h, 'blueBackground')
+    this.paddle = new Paddle(this.game, 0, 0)
+    this.bricks = new Bricks(this.game)
+    this.ball = new Ball(this.game, 0, 0)
+
+    const pHeight = this.paddle.height
+
+    this.blackLine = new Tile(this.game, 0, 0, w, pHeight, 'blackBackground')
+    this.blackLine.anchor.set(0, 1)
+    this.blackLine.y = h
+  }
+
+  setPhysicsSystem() {
+    //Physics system
+    this.game.physics.startSystem(Phaser.Physics.ARCADE);
+
+    //Turns off collision with the bottom of the world
+    this.game.physics.arcade.checkCollision.down = false
   }
 
   setTexts(): void {
