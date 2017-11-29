@@ -61,6 +61,10 @@ export default class MainState extends State {
     this.bricks = new Bricks(this.game)
     this.ball = new Ball(this.game, 0, 0)
 
+    //Check if ball falls out
+    this.ball.checkWorldBounds = true;
+    this.ball.events.onOutOfBounds.add(this.loseLife, this);
+
     const pHeight = this.paddle.height
 
     this.blackLine = new Tile(this.game, 0, 0, w, pHeight, 'blackBackground')
@@ -114,11 +118,22 @@ export default class MainState extends State {
   removeBrick(ball: Ball, brick: Phaser.Sprite): void {
     //Removes collisioned brick
     brick.kill()
+    this.player.stats.score += 10
+    this.scoreText.text = `${this.player.stats.score} points`
     this.sfxHitBrick.play()
   }
 
-  hitPaddle() {
+  hitPaddle(): void {
     //Plays sound when the ball hits the paddle
     this.sfxHitPaddle.play()
+  }
+
+  loseLife(): void {
+    this.player.stats.lives--
+    //Set paddle to center
+    this.paddle.resetPosition()
+    //Set ball to center
+    this.ball.resetPosition(this.paddle.x, this.paddle.y, this.paddle.height)
+    this.livesText.text = `Lives: ${this.player.stats.lives}`
   }
 }
