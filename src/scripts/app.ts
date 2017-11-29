@@ -8,12 +8,14 @@ import 'phaser'
 
 import Preloader from './states/preloader'
 import MainState from './states/main'
+import IntroState from './states/intro'
 
 export default class App extends Phaser.Game {
     constructor(config: Phaser.IGameConfig) {
       super(config)
       this.state.add('preloader', Preloader)
       this.state.add('main', MainState)
+      this.state.add('intro', IntroState)
       this.state.start('preloader')
     }
   }

@@ -51,7 +51,7 @@ export default class MainState extends State {
   }
 
   createGameElements(): void {
-    //Set Game Elements
+    //Get World size
     const w = this.game.world.width
     const h = this.game.world.height
 
