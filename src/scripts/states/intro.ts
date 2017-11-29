@@ -11,9 +11,7 @@ export default class IntroState extends State {
   create(): void {
     this.setBackground()
     this.setLogo()
-    this.setStartButton()
-
-    
+    this.setStartButton()   
   }
 
   update(): void {

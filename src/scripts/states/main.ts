@@ -130,10 +130,18 @@ export default class MainState extends State {
 
   loseLife(): void {
     this.player.stats.lives--
-    //Set paddle to center
-    this.paddle.resetPosition()
-    //Set ball to center
-    this.ball.resetPosition(this.paddle.x, this.paddle.y, this.paddle.height)
-    this.livesText.text = `Lives: ${this.player.stats.lives}`
+    if (this.player.stats.lives === 0) {
+      this.goToOver()
+    } else {
+      //Set paddle to center
+      this.paddle.resetPosition()
+      //Set ball to center
+      this.ball.resetPosition(this.paddle.x, this.paddle.y, this.paddle.height)
+      this.livesText.text = `Lives: ${this.player.stats.lives}`
+    }
+    
+  }
+  goToOver(): void {
+    this.state.start('over', true, false, this.player)
   }
 }
