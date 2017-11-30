@@ -3,6 +3,7 @@
 import State from './state'
 
 const logoImage = require('assets/images/logo_game.png')
+const startButtonImage = require('assets/images/btn_start.png')
 const blueBackgroundImage  = require('assets/images/bg_blue.png')
 const blackBackgroundImage  = require('assets/images/bg_black.png')
 const paddleImage  = require('assets/images/paddle.png')
@@ -24,6 +25,7 @@ export default class PreloaderState extends State {
 
   loadImages() {
     this.game.load.image('logo', logoImage)
+    this.game.load.spritesheet('startButton', startButtonImage, 190, 49)
     this.game.load.image('blackBackground', blackBackgroundImage)
     this.game.load.image('blueBackground', blueBackgroundImage)
     this.game.load.image('paddle', paddleImage)
