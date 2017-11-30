@@ -121,6 +121,9 @@ export default class MainState extends State {
     this.player.stats.score += 10
     this.scoreText.text = `${this.player.stats.score} points`
     this.sfxHitBrick.play()
+    if (this.bricks.countLiving() === 0) {
+      this.goToOver()
+    }
   }
 
   hitPaddle(): void {
